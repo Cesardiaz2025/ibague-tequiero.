@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<meta name="theme-color" content="#070707">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>ibagué T.Q.M. · TV en vivo</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Grotesk:wght@700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:#070707;color:#fff;font-family:'Inter',sans-serif;line-height:1.4;overflow-x:hidden;padding-bottom:env(safe-area-inset-bottom)}
+header{position:sticky;top:0;z-index:50;background:rgba(7,7,7,0.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid #222;padding:14px 16px;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;letter-spacing:-0.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.logo span{color:#ff2a2a}
+.logo small{color:#666;font-weight:400;font-size:11px;display:block}
+@media(min-width:640px){.logo{font-size:22px}.logo small{display:inline;font-size:14px}}
+.nav{font-size:10px;color:#999;letter-spacing:1px;white-space:nowrap;display:none}
+@media(min-width:640px){.nav{display:block}}
+.hero{padding:28px 16px 16px;display:flex;flex-direction:column;gap:14px}
+@media(min-width:768px){.hero{padding:48px 28px 20px;flex-direction:row;justify-content:space-between;align-items:end}}
+.hero h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(38px,11vw,84px);line-height:0.92;letter-spacing:-2px;text-transform:lowercase}
+.hero h1 em{font-style:normal;color:#666}
+.sub{color:#999;font-size:13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.sub b{color:#fff;background:#1a1a1a;border:1px solid #222;padding:7px 12px;border-radius:999px;font-size:12px}
+.filters{display:flex;gap:8px;padding:0 16px 18px;overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch;scroll-snap-type:x mandatory}
+.filters::-webkit-scrollbar{display:none}
+@media(min-width:768px){.filters{padding:0 28px 24px}}
+.filter{flex:0 0 auto;padding:10px 16px;border-radius:999px;border:1px solid #222;background:#111;color:#aaa;font-size:13px;cursor:pointer;scroll-snap-align:start}
+.filter.active{background:#fff;color:#000;border-color:#fff;font-weight:600}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 40px}
+@media(min-width:640px){.grid{grid-template-columns:repeat(3,1fr);gap:12px}}
+@media(min-width:1024px){.grid{grid-template-columns:repeat(4,1fr);gap:14px;padding:0 28px 60px}}
+@media(min-width:1400px){.grid{grid-template-columns:repeat(5,1fr)}}
+.card{background:#111;border:1px solid #222;border-radius:16px;overflow:hidden;cursor:pointer;transition:transform .2s,border-color .2s}
+.card:active{transform:scale(0.97)}
+@media(hover:hover){.card:hover{transform:translateY(-3px);border-color:#333}}
+.thumb{aspect-ratio:16/10;background:#0e0e0e;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:12px}
+.thumb-preview{font-weight:800;opacity:0.22;font-size:clamp(14px,4vw,24px);letter-spacing:-0.5px;text-align:center;line-height:1.1;z-index:1}
+.badge{position:absolute;top:8px;left:8px;z-index:3;background:#ff2a2a;color:#fff;font-size:9px;font-weight:800;padding:4px 7px;border-radius:999px;display:flex;align-items:center;gap:4px;letter-spacing:0.5px}
+.dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:pulse 1.4s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.cat-dot{position:absolute;top:8px;right:8px;z-index:3;font-size:9px;background:rgba(0,0,0,.7);border:1px solid #333;padding:3px 6px;border-radius:999px;color:#ccc}
+.play-ico{position:absolute;bottom:8px;right:8px;z-index:3;width:32px;height:32px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;font-size:12px}
+.overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 55%);z-index:2}
+.info{padding:10px 12px 12px}
+.info h3{font-size:13px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+@media(min-width:768px){.info h3{font-size:15px}}
+.info p{font-size:11px;color:#999;margin-top:2px}
+.section2{border-top:1px solid #222;padding:44px 16px 80px;background:#0c0c0c}
+@media(min-width:768px){.section2{padding:60px 28px}}
+.section2 h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(34px,9vw,64px);line-height:0.95}
+.kicker{font-size:10px;letter-spacing:3px;color:#999;margin-bottom:14px}
+.radios{display:grid;grid-template-columns:1fr;gap:10px;margin-top:24px}
+@media(min-width:640px){.radios{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.radios{grid-template-columns:repeat(4,1fr)}}
+.radio{background:#151515;border:1px solid #222;border-radius:14px;padding:14px;display:flex;justify-content:space-between;align-items:center}
+.play-btn{width:38px;height:38px;border-radius:50%;background:#fff;color:#000;display:grid;place-items:center;cursor:pointer;border:0;font-size:13px;flex:0 0 auto}
+.modal{position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.95);backdrop-filter:blur(12px);display:none;place-items:center;padding:0}
+.modal.active{display:grid}
+.modal-box{background:#101010;border:1px solid #222;overflow:hidden;width:100%;max-width:1000px;height:100dvh;height:100vh;display:flex;flex-direction:column}
+@media(min-width:768px){.modal{padding:16px}.modal-box{border-radius:22px;height:auto}}
+.modal-head{padding:14px 16px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #222;flex:0 0 auto}
+.close{background:#222;border:0;color:#fff;width:36px;height:36px;border-radius:50%;cursor:pointer;font-size:16px;flex:0 0 auto}
+.player{flex:1;background:#000;position:relative;min-height:0}
+.player iframe{width:100%;height:100%;border:0;display:block}
+.player-note{font-size:11px;color:#777;padding:10px 16px;border-top:1px solid #222;text-align:center}
+.bottom-bar{position:fixed;bottom:0;left:0;right:0;z-index:60;background:rgba(10,10,10,0.95);backdrop-filter:blur(20px);border-top:1px solid #222;padding:10px 16px calc(10px + env(safe-area-inset-bottom));display:flex;justify-content:center;gap:8px}
+.bottom-bar button{flex:1;max-width:200px;padding:11px;border-radius:999px;border:1px solid #222;background:#111;color:#ddd;font-size:13px;cursor:pointer}
+.bottom-bar button.active{background:#fff;color:#000}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">ibagué <span>T.Q.M.</span> <small>· Televisión y música en vivo</small></div>
+<div class="nav">IBAGUÉ • COLOMBIA</div>
+</header>
+<div class="hero">
+<h1>Enciende<br>la pantalla<em>.</em></h1>
+<div class="sub">Transmisión continua <b>25 canales ↗</b> <span style="color:#666">Toca un canal para verlo</span></div>
+</div>
+<div class="filters" id="filters"></div>
+<div class="grid" id="grid"></div>
+<div class="section2">
+<div class="kicker">EL SONIDO DE TU MOMENTO</div>
+<h2>Música sin<br>pausa.</h2>
+<div class="radios" id="radios"></div>
+<p style="font-size:11px;color:#666;margin-top:16px">Optimizado para celular, tablet y computador • Sin app, solo abre el link</p>
+</div>
+<div class="modal" id="modal">
+<div class="modal-box">
+<div class="modal-head"><div style="min-width:0"><h3 id="mTitle" style="font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis"></h3><p id="mCat" style="font-size:11px;color:#888;margin-top:2px"></p></div><button class="close" onclick="closeModal()">✕</button></div>
+<div class="player" id="player"></div>
+<div class="player-note">Si no carga, espera 5 segundos o toca el reproductor • Funciona en cualquier dispositivo</div>
+</div>
+</div>
+<div class="bottom-bar" id="bottomBar"></div>
+<script>
+const channels=[
+{name:"FIFA Plus",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=FIFA-Plus&auto=false"},
+{name:"MLB TV",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=MLB-TV&auto=false"},
+{name:"Tennis Channel",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=Tennis-Channel&auto=false"},
+{name:"HBO Latino",cat:"Cine",src:"https://trend48.st/live-tv?ch=hbolatino-usa"},
+{name:"Fox Sports 1",cat:"Deportes",src:"https://trend48.st/live-tv?ch=fox-sports-1"},
+{name:"HBO Movies",cat:"Cine",src:"https://trend48.st/live-tv?ch=hbomovies-usa"},
+{name:"NBA TV",cat:"Deportes",src:"https://trend48.st/live-tv?ch=nbatv-usa"},
+{name:"PokerGO",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=PokerGO&auto=false"},
+{name:"Bravo",cat:"Entretenimiento",src:"https://trend48.st/live-tv?ch=bravo-usa"},
+{name:"AXS TV",cat:"Música",src:"https://trend48.st/live-tv?ch=axs-usa"},
+{name:"Real Madrid TV",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=Real-Madrid-TV&auto=false"},
+{name:"Kozoom TV",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=Kozoom-TV&auto=false"},
+{name:"Strongman",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=Strongman&auto=false"},
+{name:"Red Bull TV",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=Red-Bull-TV&auto=false"},
+{name:"Miami TV Latino",cat:"Entretenimiento",src:"https://www.parsatv.com/embed.php?name=Miami-TV-Latino&auto=false"},
+{name:"Telemundo Accion",cat:"Cine",src:"https://www.parsatv.com/embed.php?name=Telemundo-Accion&auto=false"},
+{name:"Cine Sony",cat:"Cine",src:"https://www.parsatv.com/embed.php?name=Cine-Sony&auto=false"},
+{name:"Deluxe Music",cat:"Música",src:"https://www.parsatv.com/embed.php?name=Deluxe-Music&auto=false"},
+{name:"Retro Music",cat:"Música",src:"https://www.parsatv.com/embed.php?name=Retro-Music&auto=false"},
+{name:"Deejay TV",cat:"Música",src:"https://www.parsatv.com/embed.php?name=Deejay-TV&auto=false"},
+{name:"Vevo TV",cat:"Música",src:"https://www.parsatv.com/embed.php?name=Vevo-TV&auto=false"},
+{name:"FITE 247",cat:"Deportes",src:"https://www.parsatv.com/embed.php?name=FITE-247&auto=false"},
+{name:"FXM",cat:"Cine",src:"https://trend48.st/live-tv?ch=fxm-usa"},
+{name:"A&E",cat:"Entretenimiento",src:"https://trend48.st/live-tv?ch=ae-usa"},
+{name:"AMC",cat:"Cine",src:"https://trend48.st/live-tv?ch=amc-usa"},
+];
+const cats=["Todos","Deportes","Cine","Entretenimiento","Música"];
+let active="Todos";
+function renderFilters(){document.getElementById('filters').innerHTML=cats.map(c=>`<button class="filter ${active===c?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join(''); document.getElementById('bottomBar').innerHTML=cats.slice(0,3).map(c=>`<button class="${active===c?'active':''}" onclick="setFilter('${c}')">${c}</button>`).join('')+`<button onclick="document.getElementById('grid').scrollIntoView({behavior:'smooth'})">↑ Arriba</button>`;}
+function setFilter(c){active=c;renderFilters();renderGrid();window.scrollTo({top:document.getElementById('grid').offsetTop-70,behavior:'smooth'});}
+function renderGrid(){const list=active==="Todos"?channels:channels.filter(ch=>ch.cat===active);document.getElementById('grid').innerHTML=list.map(ch=>`<div class="card" onclick="openModal('${ch.name.replace(/'/g,"\'")}','${ch.cat}','${ch.src}')"><div class="thumb"><div class="badge"><div class="dot"></div>EN VIVO</div><div class="cat-dot">${ch.cat}</div><div class="thumb-preview">${ch.name}</div><div class="overlay"></div><div class="play-ico">▶</div></div><div class="info"><h3>${ch.name}</h3><p>${ch.cat} • Toca para ver</p></div></div>`).join('');}
+function openModal(name,cat,src){document.getElementById('mTitle').textContent=name;document.getElementById('mCat').textContent=cat+" • EN VIVO";document.getElementById('player').innerHTML=`<iframe src="${src}" allowfullscreen allow="autoplay; encrypted-media; fullscreen" scrolling="no" frameborder="0" playsinline></iframe>`;document.getElementById('modal').classList.add('active');document.body.style.overflow='hidden';}
+function closeModal(){document.getElementById('modal').classList.remove('active');document.getElementById('player').innerHTML='';document.body.style.overflow='';}
+document.getElementById('radios').innerHTML=[1,2,3,4].map(n=>`<div class="radio"><div><b style="font-size:14px">Emisora 0${n}</b><br><span style="font-size:11px;color:#888">Radio en vivo · Zeno</span></div><button class="play-btn">▶</button></div>`).join('');
+renderFilters();renderGrid();
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+</script>
+</body>
+</html>
